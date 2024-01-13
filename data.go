@@ -47,7 +47,7 @@ var (
 type ResultMap map[string]uint
 
 type Gematria struct {
-	Jewish  uint
-	English uint
-	Simple  uint
+	Jewish  uint `json:"j"`
+	English uint `json:"e"`
+	Simple  uint `json:"s"`
 }
