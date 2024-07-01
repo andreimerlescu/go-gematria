@@ -1,8 +1,8 @@
 package go_gematria
 
 import (
-	`reflect`
-	`testing`
+	"reflect"
+	"testing"
 )
 
 func TestNewGemScore(t *testing.T) {

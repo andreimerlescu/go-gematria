@@ -1,25 +1,23 @@
 package go_gematria
 
 import (
-	`fmt`
-	`log`
-	`regexp`
-	`strings`
+	"fmt"
+	"regexp"
+	"strings"
 )
 
-func characterScores(str string) (uint, uint, uint) {
+func characterScores(str string) (uint, uint, uint, error) {
 	if len(str) != 1 {
-		log.Println("fatal characterScores(", str, ")")
-		return 0, 0, 0
+		return 0, 0, 0, fmt.Errorf("string must only contain 1 character")
 	}
 	j, e, s := jewishCodes[str], englishCodes[str], simpleCodes[str]
-	return j, e, s
+	return j, e, s, nil
 }
 
 func NewGematria(data string) (Gematria, error) {
 	re, err := regexp.Compile(`[^a-zA-Z\d.\s]`)
 	if err != nil {
-		return Gematria{}, err
+		return Gematria{}, fmt.Errorf("failed to compile gematria regex: %w", err)
 	}
 	data = re.ReplaceAllString(data, "")
 	data = strings.TrimLeft(data, "")
@@ -28,7 +26,10 @@ func NewGematria(data string) (Gematria, error) {
 	for i := 0; i < len(dataBytes); i++ {
 		wat := strings.ToUpper(string(dataBytes[i]))
 		if len(wat) == 1 && wat != "" && wat != " " {
-			j, e, s := characterScores(wat)
+			j, e, s, err := characterScores(wat)
+			if err != nil {
+				return Gematria{}, err
+			}
 			letters = append(letters, Gematria{
 				Jewish:  j,
 				English: e,

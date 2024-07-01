@@ -31,6 +31,7 @@ interesting results that share the similar scores with their results. For exampl
 | Jewish | 139   | Nikolai        |
 | Jewish | 139   | Agora          |
 
+
 | Kind   | Score | Gematrix Entry |
 |--------|-------|----------------|
 | Simple | 306   | Michael        |
@@ -62,7 +63,7 @@ Here is an example program that uses this package.
 package main
 
 import (
-	`fmt`
+	"fmt"
 	gematria "github.com/andreimerlescu/go-gematria"
 )
 
